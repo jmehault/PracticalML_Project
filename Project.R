@@ -79,3 +79,23 @@ for (i in 1:n){
 }
 
 print(c(apply(Acc,2,mean)[1], apply(Acc,2,sd)[1])) # compute mean and 68% error
+
+
+################ PREDICTION ON TESTING FILE
+
+test <- read.csv("pml-testing.csv")
+## apply same pre proccess steps as training set          
+# remove NA's and non numeric variables
+test <- replace(test,(test=="#DIV/0!"),"NA")
+test <- subset(test,select=colSums(is.na(test))<1)
+ntest <- data.frame(test[,-c(1,2,3,4,5,6)])
+# keep variables from PCA study
+mtest <- subset(ntest, select=keepVar)
+# normalize data with same mean and scale as training set
+mtestS <- predict(preObj, mtest)             
+
+# predict the classes
+pred <- predict(modFit, newdata=mtestS)
+pred
+
+
