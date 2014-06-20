@@ -23,3 +23,4 @@ This shows that the variables selected yield stables results and that in our cas
 
 
 I used that one to predict the classe of the data from "plm-testing.csv" file
+And I expected to loose the prediction for 2 cases in the test data set
